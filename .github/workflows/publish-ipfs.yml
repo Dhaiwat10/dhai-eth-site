@@ -1,0 +1,48 @@
+name: Build and Publish to IPFS (Pinata) and Update IPNS
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ipfs-publish-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v1
+        with:
+          bun-version: latest
+
+      - name: Install dependencies
+        run: bun install --frozen-lockfile
+
+      - name: Build
+        run: bun run build
+
+      - name: Publish to IPFS (Pinata) and Update IPNS (w3name)
+        run: bun run publish:ipfs
+        env:
+          PINATA_JWT: ${{ secrets.PINATA_JWT }}
+          PINATA_API_KEY: ${{ secrets.PINATA_API_KEY }}
+          PINATA_API_SECRET: ${{ secrets.PINATA_API_SECRET }}
+          W3NAME_KEY_B64: ${{ secrets.W3NAME_KEY_B64 }}
+
+      - name: Upload publish info
+        uses: actions/upload-artifact@v4
+        with:
+          name: ipfs-publish
+          path: latest-ipfs.txt
+          if-no-files-found: ignore
+
+
