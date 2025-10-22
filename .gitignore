@@ -26,3 +26,4 @@ dist-ssr
 .env
 
 signing-key.txt
+latest-ipfs.txt

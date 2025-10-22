@@ -1,4 +1,0 @@
-CID=bafybeibnzclzmk5wwukneq7hn5semy6lzwd6izp7jchbsxnc57zisoamn4
-IPNS=k51qzi5uqu5dmidxqih17s7prwj874u06ggzfgdtjcgebvedudcyzr2y9ox8ss
-Gateway (CID): https://ipfs.io/ipfs/bafybeibnzclzmk5wwukneq7hn5semy6lzwd6izp7jchbsxnc57zisoamn4/
-Gateway (IPNS): https://ipfs.io/ipns/k51qzi5uqu5dmidxqih17s7prwj874u06ggzfgdtjcgebvedudcyzr2y9ox8ss/

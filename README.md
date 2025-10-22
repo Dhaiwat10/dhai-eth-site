@@ -1,73 +1,172 @@
-# React + TypeScript + Vite
+# dhai.eth
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern React + Vite + Tailwind CSS site automatically published to IPFS and IPNS, and attached to my ENS.
 
-Currently, two official plugins are available:
+## 🌐 Live Site
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **IPNS**: [https://dhai.eth.limo](https://dhai.eth.limo)
+- **Latest IPFS Gateway**: Check `latest-ipfs.txt` after each deploy
 
-## React Compiler
+## 🚀 Features
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **React 19** + **TypeScript** + **Vite** for fast development
+- **Tailwind CSS v4** for styling
+- **Automated IPFS Publishing** via Pinata on every push to `main`
+- **IPNS Updates** via w3name for persistent addressing
+- **GitHub Actions** CI/CD pipeline
 
-## Expanding the ESLint configuration
+## 📦 Development
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+### Prerequisites
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+- [Bun](https://bun.sh) (or Node.js 18+)
+- [Pinata](https://pinata.cloud) account with JWT
+- w3name signing key for IPNS updates
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+### Installation
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+bun install
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### Development Server
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+bun run dev
 ```
+
+Open [http://localhost:5173](http://localhost:5173) to view the site.
+
+### Build
+
+```bash
+bun run build
+```
+
+Outputs production build to `dist/`.
+
+### Preview Build
+
+```bash
+bun run preview
+```
+
+Preview the production build locally at [http://localhost:4173](http://localhost:4173).
+
+## 🌍 IPFS Publishing
+
+### Manual Publish
+
+To manually publish to IPFS and update IPNS:
+
+```bash
+bun run publish:ipfs
+```
+
+**Required Environment Variables:**
+
+- `PINATA_JWT` - Your Pinata JWT token ([get one here](https://app.pinata.cloud/developers/api-keys))
+- `W3NAME_KEY_B64` - Base64-encoded w3name private key (see below)
+
+**Optional:** Place your w3name key in `signing-key.txt` (supported formats: raw bytes, base64, hex, JSON array, or PEM).
+
+### How It Works
+
+1. **Build** - Compiles the React app to static files in `dist/`
+2. **Upload to IPFS** - Uploads the entire `dist/` folder to Pinata using the Files API
+3. **Update IPNS** - Updates your w3name IPNS record to point to the new CID
+4. **Output** - Writes CID, IPNS name, and gateway URLs to `latest-ipfs.txt`
+
+### Getting Your w3name Key
+
+If you have an existing w3name signing key:
+
+```bash
+# Convert to base64 for GitHub secrets
+base64 -i signing-key.txt | tr -d '\n' | pbcopy
+```
+
+If you need to create a new w3name key:
+
+```bash
+npm install -g w3name
+w3name create > my-name.key
+# Save the output - you'll need the private key bytes
+```
+
+## 🤖 Automated Publishing (GitHub Actions)
+
+Every push to `main` automatically:
+1. Builds the site
+2. Uploads to IPFS via Pinata
+3. Updates the IPNS record
+4. Uploads publish details as a workflow artifact
+
+### Required GitHub Secrets
+
+Set these as **environment secrets** for the `main` environment:
+
+| Secret | Description | How to Get |
+|--------|-------------|------------|
+| `PINATA_JWT` | Pinata API JWT token | [Pinata Dashboard → API Keys](https://app.pinata.cloud/developers/api-keys) |
+| `W3NAME_KEY_B64` | Base64-encoded w3name private key | `base64 -i signing-key.txt \| tr -d '\n'` |
+
+**Setting Secrets:**
+
+1. Go to **Settings → Environments → main**
+2. Add secrets listed above
+3. Push to `main` to trigger the workflow
+
+**Note:** `PINATA_API_KEY` and `PINATA_API_SECRET` are optional legacy credentials; the workflow uses `PINATA_JWT`.
+
+## 📂 Project Structure
+
+```
+.
+├── src/
+│   ├── App.tsx          # Main React component
+│   ├── main.tsx         # React entry point
+│   └── index.css        # Tailwind directives
+├── scripts/
+│   └── publish-ipfs.ts  # IPFS/IPNS publish script
+├── .github/
+│   └── workflows/
+│       └── publish-ipfs.yml  # CI/CD workflow
+├── dist/                # Build output (gitignored)
+├── signing-key.txt      # Local w3name key (gitignored)
+└── latest-ipfs.txt      # Last publish details (gitignored)
+```
+
+## 🔧 Scripts
+
+| Command | Description |
+|---------|-------------|
+| `bun run dev` | Start development server |
+| `bun run build` | Build for production |
+| `bun run preview` | Preview production build |
+| `bun run lint` | Run ESLint |
+| `bun run publish:ipfs` | Build + publish to IPFS + update IPNS |
+
+## 🛠️ Tech Stack
+
+- **React 19** - UI framework
+- **TypeScript** - Type safety
+- **Vite 7** - Build tool
+- **Tailwind CSS v4** - Styling
+- **Pinata** - IPFS pinning service
+- **w3name** - IPNS over HTTP
+- **GitHub Actions** - CI/CD
+
+## 📝 Notes
+
+- IPNS propagation to IPFS gateways may take a few minutes
+- The workflow artifact contains the CID and IPNS details for each deploy
+- Gateway URLs use `ipfs.io` by default; you can use any public gateway
+
+## 📄 License
+
+MIT
+
+---
+
+Built with ❤️ using React + IPFS
