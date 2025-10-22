@@ -15,6 +15,14 @@ A modern React + Vite + Tailwind CSS site automatically published to IPFS and IP
 - **IPNS Updates** via w3name for persistent addressing
 - **GitHub Actions** CI/CD pipeline
 
+## 📚 Setup Guide
+
+**Want to build your own version from scratch?** Check out the complete step-by-step guide:
+
+→ **[Complete Setup Guide](./GUIDE.md)** ← Start here!
+
+The guide covers everything from creating the project to ENS configuration.
+
 ## 📦 Development
 
 ### Prerequisites
