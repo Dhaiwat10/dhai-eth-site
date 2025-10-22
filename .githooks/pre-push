@@ -1,0 +1,28 @@
+#!/bin/sh
+
+# Pre-push hook: ensure build passes before allowing push
+
+echo "Running pre-push checks: building project..."
+
+# Use Bun if available; fallback to npm/yarn/pnpm if needed
+if command -v bun >/dev/null 2>&1; then
+  bun run build
+elif command -v pnpm >/dev/null 2>&1; then
+  pnpm run build
+elif command -v yarn >/dev/null 2>&1; then
+  yarn build
+else
+  npm run build
+fi
+
+status=$?
+
+if [ $status -ne 0 ]; then
+  echo "\nBuild failed. Aborting push."
+  exit 1
+fi
+
+echo "Build successful. Proceeding with push."
+exit 0
+
+

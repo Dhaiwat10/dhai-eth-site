@@ -16,7 +16,12 @@ const markdownFiles = import.meta.glob("../posts/*.md", {
 });
 
 const FRONT_MATTER_REGEX = /^---\s*\n([\s\S]*?)\n---\s*\n?/;
-const ARRAY_FIELDS: Array<keyof BlogFrontMatter> = ["tags"];
+type ArrayFieldKey = "tags";
+type ScalarFieldKey = Exclude<keyof BlogFrontMatter, ArrayFieldKey>;
+const ARRAY_FIELDS: ReadonlyArray<ArrayFieldKey> = ["tags"] as const;
+function isArrayField(key: keyof BlogFrontMatter): key is ArrayFieldKey {
+  return (ARRAY_FIELDS as ReadonlyArray<ArrayFieldKey>).includes(key as ArrayFieldKey);
+}
 
 function parseFrontMatter(raw: string): { data: BlogFrontMatter; content: string } {
   const match = raw.match(FRONT_MATTER_REGEX);
@@ -49,13 +54,13 @@ function parseFrontMatterBlock(block: string): BlogFrontMatter {
     }
 
     if (line.startsWith("-")) {
-      if (!currentKey || !ARRAY_FIELDS.includes(currentKey)) {
+      if (!currentKey || !isArrayField(currentKey)) {
         continue;
       }
 
       const value = line.replace(/^-+\s*/, "").trim();
       const existing = data[currentKey];
-      const items = Array.isArray(existing) ? existing : [];
+      const items: string[] = Array.isArray(existing) ? existing : [];
       items.push(cleanValue(value));
       data[currentKey] = items;
       continue;
@@ -65,20 +70,20 @@ function parseFrontMatterBlock(block: string): BlogFrontMatter {
     const valuePart = rest.join(":").trim();
     const valueKey = key.trim() as keyof BlogFrontMatter;
 
-    if (ARRAY_FIELDS.includes(valueKey)) {
+    if (isArrayField(valueKey)) {
       currentKey = valueKey;
-      data[valueKey] = Array.isArray(data[valueKey]) ? data[valueKey] : [];
-
+      const existing = data[valueKey];
+      const items: string[] = Array.isArray(existing) ? existing : [];
       if (valuePart) {
-        const existing = data[valueKey] as string[];
-        existing.push(cleanValue(valuePart));
-        data[valueKey] = existing;
+        items.push(cleanValue(valuePart));
       }
+      data[valueKey] = items;
       continue;
     }
 
     currentKey = valueKey;
-    data[valueKey] = cleanValue(valuePart);
+    const scalarKey = valueKey as ScalarFieldKey;
+    data[scalarKey] = cleanValue(valuePart);
   }
 
   return data;
