@@ -1,1 +1,40 @@
 @import "tailwindcss";
+
+/* Code block container styling */
+pre {
+  border-radius: 0.5rem !important;
+  overflow-x: auto !important;
+  background: #282c34 !important;
+}
+
+/* Ensure proper scrolling for code blocks */
+pre code {
+  display: block;
+  overflow-x: auto;
+  white-space: pre;
+  background: transparent !important;
+}
+
+/* Remove any unwanted backgrounds from syntax tokens (prism output uses spans) */
+pre code span {
+  background: transparent !important;
+}
+
+/* Also clear inline style background if present */
+pre code [style*="background"] {
+  background: transparent !important;
+}
+
+/* Line clamp utility for truncating text */
+.line-clamp-3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Cursor pointer for all buttons */
+button {
+  cursor: pointer;
+}

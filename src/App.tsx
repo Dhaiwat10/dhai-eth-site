@@ -1,13 +1,20 @@
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Layout from './components/Layout';
+import Home from './components/Home';
+import BlogList from './components/BlogList';
+import BlogPost from './components/BlogPost';
+
 function App() {
   return (
-    <div className="min-h-screen bg-gray-50">
-      <div className="container mx-auto px-4 py-8">
-        <h1 className="text-4xl font-bold text-gray-900">dhai.eth</h1>
-        <h3 className="text-2xl">Dhaiwat Pandya</h3>
-
-        <p>Ethereum Developer. Relentlessly Curious.</p>
-      </div>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route index element={<Home />} />
+          <Route path="blog" element={<BlogList />} />
+          <Route path="blog/:id" element={<BlogPost />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
   );
 }
 
