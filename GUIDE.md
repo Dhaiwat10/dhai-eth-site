@@ -32,7 +32,6 @@ curl -fsSL https://bun.sh/install | bash
 - **GitHub account** - for hosting code and CI/CD
 - **Pinata account** - for IPFS pinning ([sign up](https://app.pinata.cloud/register))
 - **ENS domain** (optional) - if you want `yourname.eth` ([buy on ENS](https://app.ens.domains/))
-- **Ethereum wallet** - if setting up ENS (MetaMask recommended)
 
 ---
 
