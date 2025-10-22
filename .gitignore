@@ -24,3 +24,5 @@ dist-ssr
 *.sw?
 
 .env
+
+signing-key.txt
