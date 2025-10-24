@@ -1,5 +1,5 @@
-import { Link } from 'react-router-dom';
-import { blogPosts } from '../data/blog-posts';
+import { Link } from "react-router-dom";
+import { blogPosts } from "../data/blog-posts";
 
 function Home() {
   const latestPosts = [...blogPosts]
@@ -14,12 +14,43 @@ function Home() {
         <p className="text-xl text-gray-400 max-w-2xl">
           Ethereum Developer. Relentlessly Curious.
         </p>
+
+        <div className="flex flex-row gap-4 mt-4">
+          <Link
+            to="https://x.com/dhaiwat10"
+            className="text-gray-400 hover:text-white font-medium transition-colors underline"
+            target="_blank"
+          >
+            Twitter
+          </Link>
+          <Link
+            to="https://github.com/dhaiwat10"
+            className="text-gray-400 hover:text-white font-medium transition-colors underline"
+
+          >
+            GitHub
+          </Link>
+          <Link
+            to="https://hackmd.io/@dhaiwat10/ByA1tWTgee"
+            className="text-gray-400 hover:text-white font-medium transition-colors underline"
+
+          >
+            CV
+          </Link>
+          <Link
+            to="https://farcaster.xyz/dhai.eth"
+            className="text-gray-400 hover:text-white font-medium transition-colors underline"
+
+          >
+            Farcaster
+          </Link>
+        </div>
       </section>
 
       <section>
         <div className="flex justify-between items-center mb-6">
           <h3 className="text-2xl font-bold text-white">Latest Posts</h3>
-          <Link 
+          <Link
             to="/blog"
             className="text-gray-400 hover:text-white font-medium transition-colors"
           >
@@ -29,7 +60,7 @@ function Home() {
 
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {latestPosts.map((post) => (
-            <article 
+            <article
               key={post.id}
               className="rounded-lg border border-gray-800 p-6 hover:border-gray-700 transition-all bg-gray-900/50"
             >
@@ -38,20 +69,20 @@ function Home() {
                   {post.title}
                 </h4>
               </Link>
-              
+
               <time className="text-sm text-gray-500">
-                {new Date(post.date).toLocaleDateString('en-US', {
-                  year: 'numeric',
-                  month: 'long',
-                  day: 'numeric'
+                {new Date(post.date).toLocaleDateString("en-US", {
+                  year: "numeric",
+                  month: "long",
+                  day: "numeric",
                 })}
               </time>
-              
+
               <p className="text-gray-400 mt-3 mb-4 line-clamp-3">
                 {post.excerpt}
               </p>
-              
-              <Link 
+
+              <Link
                 to={`/blog/${post.id}`}
                 className="text-gray-400 hover:text-white font-medium text-sm transition-colors inline-flex items-center"
               >
@@ -66,4 +97,3 @@ function Home() {
 }
 
 export default Home;
-
