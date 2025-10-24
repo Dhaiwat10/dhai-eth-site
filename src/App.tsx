@@ -1,8 +1,8 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Layout from './components/Layout';
-import Home from './components/Home';
-import BlogList from './components/BlogList';
-import BlogPost from './components/BlogPost';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Layout from "./components/Layout";
+import Home from "./components/Home";
+import BlogList from "./components/BlogList";
+import BlogPost from "./components/BlogPost";
 
 function App() {
   return (

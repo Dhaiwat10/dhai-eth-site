@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { blogPosts } from "../data/blog-posts";
+import { LetterboxdRecent } from "./LetterboxdRecent";
 
 function Home() {
   const latestPosts = [...blogPosts]
@@ -26,21 +27,18 @@ function Home() {
           <Link
             to="https://github.com/dhaiwat10"
             className="text-gray-400 hover:text-white font-medium transition-colors underline"
-
           >
             GitHub
           </Link>
           <Link
             to="https://hackmd.io/@dhaiwat10/ByA1tWTgee"
             className="text-gray-400 hover:text-white font-medium transition-colors underline"
-
           >
             CV
           </Link>
           <Link
             to="https://farcaster.xyz/dhai.eth"
             className="text-gray-400 hover:text-white font-medium transition-colors underline"
-
           >
             Farcaster
           </Link>
@@ -91,6 +89,26 @@ function Home() {
             </article>
           ))}
         </div>
+      </section>
+
+      <section className="mt-16">
+        <div className="mb-6">
+          <div className="flex justify-between items-center mb-3">
+            <h3 className="text-2xl font-bold text-white">Recent Films</h3>
+            <Link
+              to="https://letterboxd.com/dhaiwat10"
+              className="text-gray-400 hover:text-white font-medium transition-colors"
+              target="_blank"
+            >
+              View all →
+            </Link>
+          </div>
+          <p className="text-gray-400 max-w-2xl">
+            Movies are my favourite art form. Here are a few that I watched the most recently from my Letterboxd profile.
+          </p>
+        </div>
+
+        <LetterboxdRecent username="Dhaiwat" limit={6} />
       </section>
     </div>
   );
