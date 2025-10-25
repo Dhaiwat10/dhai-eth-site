@@ -1,8 +1,8 @@
-import axios from 'axios';
-import type { GitHubStats, GitHubUser, GitHubRepo, LatestRepo } from '../types/github';
+import axios from "axios";
+import type { GitHubStats, GitHubUser, GitHubRepo } from "../types/github";
 
-const GITHUB_API_BASE = 'https://api.github.com';
-const GITHUB_GRAPHQL_API = 'https://api.github.com/graphql';
+const GITHUB_API_BASE = "https://api.github.com";
+const GITHUB_GRAPHQL_API = "https://api.github.com/graphql";
 
 export async function fetchGitHubStats(username: string): Promise<GitHubStats> {
   try {
@@ -16,18 +16,21 @@ export async function fetchGitHubStats(username: string): Promise<GitHubStats> {
     const reposResponse = await axios.get<GitHubRepo[]>(
       `${GITHUB_API_BASE}/users/${username}/repos?per_page=100&sort=updated`
     );
-    
+
     // Calculate total stars from all repos (excluding forks)
     const totalStars = reposResponse.data
-      .filter(repo => !repo.fork)
+      .filter((repo) => !repo.fork)
       .reduce((sum, repo) => sum + repo.stargazers_count, 0);
 
     // Get latest 3 non-fork repositories
     const latestRepos = reposResponse.data
-      .filter(repo => !repo.fork)
-      .sort((a, b) => new Date(b.pushed_at).getTime() - new Date(a.pushed_at).getTime())
+      .filter((repo) => !repo.fork)
+      .sort(
+        (a, b) =>
+          new Date(b.pushed_at).getTime() - new Date(a.pushed_at).getTime()
+      )
       .slice(0, 3)
-      .map(repo => ({
+      .map((repo) => ({
         name: repo.name,
         description: repo.description,
         url: repo.html_url,
@@ -46,7 +49,7 @@ export async function fetchGitHubStats(username: string): Promise<GitHubStats> {
       latestRepos,
     };
   } catch (error) {
-    console.error('Error fetching GitHub stats:', error);
+    console.error("Error fetching GitHub stats:", error);
     throw error;
   }
 }
@@ -82,19 +85,22 @@ async function fetchContributions(username: string): Promise<number> {
       },
       {
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
       }
     );
 
-    if (response.data.data?.user?.contributionsCollection?.contributionCalendar) {
-      return response.data.data.user.contributionsCollection.contributionCalendar.totalContributions;
+    if (
+      response.data.data?.user?.contributionsCollection?.contributionCalendar
+    ) {
+      return response.data.data.user.contributionsCollection
+        .contributionCalendar.totalContributions;
     }
 
     // Fallback: If GraphQL fails, return 0
     return 0;
   } catch (error) {
-    console.error('Error fetching contributions:', error);
+    console.error("Error fetching contributions:", error);
     // Return 0 if we can't fetch contributions
     return 0;
   }
