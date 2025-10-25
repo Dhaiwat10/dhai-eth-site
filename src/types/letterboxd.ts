@@ -9,6 +9,7 @@ export interface LetterboxdMovie {
   tmdbId?: string;
   review?: string;
   memberRating?: number;
+  url?: string;
 }
 
 export interface LetterboxdFeed {

@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { blogPosts } from "../data/blog-posts";
 import { LetterboxdRecent } from "./LetterboxdRecent";
+import { GitHubStats } from "./GitHubStats";
 
 function Home() {
   const latestPosts = [...blogPosts]
@@ -89,6 +90,26 @@ function Home() {
             </article>
           ))}
         </div>
+      </section>
+
+      <section className="mt-16">
+        <div className="mb-6">
+          <div className="flex justify-between items-center mb-3">
+            <h3 className="text-2xl font-bold text-white">GitHub Activity</h3>
+            <Link
+              to="https://github.com/dhaiwat10"
+              className="text-gray-400 hover:text-white font-medium transition-colors"
+              target="_blank"
+            >
+              View profile →
+            </Link>
+          </div>
+          <p className="text-gray-400 max-w-2xl">
+            I am always experimenting with problems I find interesting. I post a lot of these experiments on my GitHub.
+          </p>
+        </div>
+
+        <GitHubStats username="dhaiwat10" />
       </section>
 
       <section className="mt-16">

@@ -47,7 +47,7 @@ export function LetterboxdRecent({
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
         {Array.from({ length: limit }).map((_, i) => (
           <div key={i} className="animate-pulse">
-            <div className="bg-gray-300 dark:bg-gray-700 aspect-[2/3] rounded-lg mb-2"></div>
+            <div className="bg-gray-300 dark:bg-gray-700 aspect-2/3 rounded-lg mb-2"></div>
             <div className="h-4 bg-gray-300 dark:bg-gray-700 rounded mb-1"></div>
             <div className="h-3 bg-gray-300 dark:bg-gray-700 rounded w-3/4"></div>
           </div>
@@ -80,8 +80,14 @@ export function LetterboxdRecent({
     <div className="space-y-6">
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
         {movies.map((movie) => (
-          <div key={movie.id} className="group cursor-pointer">
-            <div className="relative aspect-[2/3] overflow-hidden rounded-lg mb-2 bg-gray-200 dark:bg-gray-800">
+          <a
+            key={movie.id}
+            href={movie.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group cursor-pointer block"
+          >
+            <div className="relative aspect-2/3 overflow-hidden rounded-lg mb-2 bg-gray-200 dark:bg-gray-800">
               {movie.posterUrl ? (
                 <img
                   src={movie.posterUrl}
@@ -113,7 +119,7 @@ export function LetterboxdRecent({
                 </p>
               )}
             </div>
-          </div>
+          </a>
         ))}
       </div>
 

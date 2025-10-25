@@ -76,7 +76,8 @@ export class LetterboxdService {
           watchedDate,
           rewatch,
           posterUrl,
-          review: reviewText || undefined
+          review: reviewText || undefined,
+          url: item.link || undefined
         });
       } catch (error) {
         console.error('Error parsing RSS item:', error);
