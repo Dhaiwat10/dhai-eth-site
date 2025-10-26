@@ -7,6 +7,7 @@ tags:
   - Ethereum
   - L2
   - Tutorial
+  - Crypto
 ---
 
 In these last few years, Layer 2s have become central to Ethereum's scaling efforts. These L2s are fast, cheap to use, and inherit Ethereum's strong security guarantees.
