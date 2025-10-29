@@ -1,10 +1,23 @@
 import { Link, Outlet, useLocation } from "react-router-dom";
+import SEO from "./SEO";
+import StructuredData from "./StructuredData";
 
 function Layout() {
   const location = useLocation();
 
+  const isHomePage = location.pathname === '/';
+  const isBlogPage = location.pathname === '/blog' || location.pathname.startsWith('/blog/');
+
   return (
     <div className="min-h-screen bg-black transition-colors">
+      <SEO 
+        title={isHomePage ? undefined : isBlogPage ? 'Blog' : undefined}
+        description={isHomePage ? undefined : isBlogPage ? 'Blog posts by Dhaiwat Pandya about Ethereum development and other topics.' : undefined}
+        type={isBlogPage ? 'article' : 'website'}
+      />
+      {isHomePage && <StructuredData type="person" />}
+      {isBlogPage && <StructuredData type="blog" />}
+      
       <nav className="sticky top-0 bg-black border-b border-gray-800 z-50">
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">

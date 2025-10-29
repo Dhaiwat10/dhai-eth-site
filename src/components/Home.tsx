@@ -69,7 +69,7 @@ function Home() {
                 </h4>
               </Link>
 
-              <time className="text-sm text-gray-500">
+              <time dateTime={post.date} className="text-sm text-gray-500">
                 {new Date(post.date).toLocaleDateString("en-US", {
                   year: "numeric",
                   month: "long",

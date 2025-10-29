@@ -3,6 +3,8 @@ import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import { blogPosts } from '../data/blog-posts';
 import CodeBlock from './CodeBlock';
+import SEO from './SEO';
+import StructuredData from './StructuredData';
 
 function BlogPost() {
   const { id } = useParams<{ id: string }>();
@@ -12,8 +14,20 @@ function BlogPost() {
     return <Navigate to="/blog" replace />;
   }
 
+  const publishedDate = new Date(post.date).toISOString();
+
   return (
     <article className="max-w-4xl mx-auto">
+      <SEO
+        title={post.title}
+        description={post.excerpt}
+        type="article"
+        publishedTime={publishedDate}
+        modifiedTime={publishedDate}
+        tags={post.tags}
+      />
+      <StructuredData type="article" article={post} />
+      
       <Link 
         to="/blog" 
         className="inline-flex items-center text-gray-400 hover:text-white mb-8 transition-colors"
@@ -26,7 +40,7 @@ function BlogPost() {
           {post.title}
         </h1>
         
-        <time className="text-gray-500">
+        <time dateTime={publishedDate} className="text-gray-500">
           {new Date(post.date).toLocaleDateString('en-US', {
             year: 'numeric',
             month: 'long',
@@ -36,12 +50,13 @@ function BlogPost() {
         
         <div className="flex flex-wrap gap-2 mt-4">
           {post.tags.map((tag) => (
-            <span 
+            <Link
               key={tag}
-              className="px-3 py-1 bg-gray-800 text-gray-300 text-sm rounded-md border border-gray-700"
+              to={`/blog?tag=${encodeURIComponent(tag)}`}
+              className="px-3 py-1 bg-gray-800 text-gray-300 text-sm rounded-md border border-gray-700 hover:bg-gray-700 hover:text-white transition-all"
             >
               {tag}
-            </span>
+            </Link>
           ))}
         </div>
       </header>

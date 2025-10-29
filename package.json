@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build",
+    "generate:sitemap": "bunx tsx scripts/generate-sitemap.ts",
+    "build": "bun run generate:sitemap && tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
     "publish:ipfs": "bun run build && bunx tsx scripts/publish-ipfs.ts"
