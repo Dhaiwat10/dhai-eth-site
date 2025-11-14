@@ -1,9 +1,24 @@
+import { useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { blogPosts } from "../data/blog-posts";
 import { LetterboxdRecent } from "./LetterboxdRecent";
 import { GitHubStats } from "./GitHubStats";
 
 function Home() {
+  const motorsportsVideoRef = useRef<HTMLVideoElement | null>(null);
+
+  useEffect(() => {
+    const video = motorsportsVideoRef.current;
+    if (!video) return;
+
+    const playPromise = video.play();
+    if (playPromise !== undefined) {
+      playPromise.catch(() => {
+        // Autoplay might be blocked; user can start playback manually.
+      });
+    }
+  }, []);
+
   const latestPosts = [...blogPosts]
     .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
     .slice(0, 3);
@@ -110,6 +125,30 @@ function Home() {
         </div>
 
         <GitHubStats username="dhaiwat10" />
+      </section>
+
+      <section className="mt-16">
+        <div className="mb-6">
+          <div className="flex justify-between items-center mb-3">
+            <h3 className="text-2xl font-bold text-white">Motorsports</h3>
+          </div>
+          <p className="text-gray-400 max-w-2xl mb-4">
+            Racetracks and racecars. There's nowhere I feel more free.
+          </p>
+        </div>
+
+        <div className="overflow-hidden rounded-xl border border-gray-800 bg-black aspect-video">
+          <video
+            ref={motorsportsVideoRef}
+            className="w-full h-full object-cover"
+            src="/vroom.mp4"
+            autoPlay
+            muted
+            loop
+            playsInline
+            controls
+          />
+        </div>
       </section>
 
       <section className="mt-16">
