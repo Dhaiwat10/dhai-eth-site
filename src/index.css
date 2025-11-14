@@ -1,5 +1,21 @@
 @import "tailwindcss";
 
+/* Global page background to avoid white iOS bounce area */
+html {
+  background-color: #000;
+  color-scheme: dark;
+}
+
+body {
+  margin: 0;
+  background-color: #000;
+  min-height: 100vh;
+}
+
+#root {
+  min-height: 100vh;
+}
+
 /* Code block container styling */
 pre {
   border-radius: 0.5rem !important;

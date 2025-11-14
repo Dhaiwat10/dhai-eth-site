@@ -61,7 +61,7 @@ function BlogPost() {
         </div>
       </header>
 
-      <div className="prose prose-lg max-w-none">
+      <div className="prose prose-lg max-w-none break-words">
         <ReactMarkdown
           remarkPlugins={[remarkGfm]}
           components={{
@@ -117,7 +117,7 @@ function BlogPost() {
             a: ({ href, children }) => (
               <a 
                 href={href}
-                className="text-gray-300 hover:text-white underline underline-offset-4 decoration-gray-600 hover:decoration-white transition-colors"
+                className="text-gray-300 hover:text-white underline underline-offset-4 decoration-gray-600 hover:decoration-white transition-colors break-all"
                 target="_blank"
                 rel="noopener noreferrer"
               >
