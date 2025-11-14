@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { blogPosts } from "../data/blog-posts";
 import { LetterboxdRecent } from "./LetterboxdRecent";
 import { GitHubStats } from "./GitHubStats";
+import TravelMap from "./TravelMap";
 
 function Home() {
   const motorsportsVideoRef = useRef<HTMLVideoElement | null>(null);
@@ -169,6 +170,17 @@ function Home() {
         </div>
 
         <LetterboxdRecent username="Dhaiwat" limit={6} />
+      </section>
+
+      <section id="travels" className="mt-16">
+        <div className="mb-6">
+          <h3 className="text-2xl font-bold text-white mb-3">Travels</h3>
+          <p className="text-gray-400 max-w-2xl">
+            Ever since I was a kid, I was fascinated with maps and travel. These are some of the places I've been fortunate enough to visit.
+          </p>
+        </div>
+
+        <TravelMap />
       </section>
     </div>
   );
