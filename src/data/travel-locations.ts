@@ -72,5 +72,6 @@ export const travelLocations: TravelLocation[] = [
   { city: "Tbilisi", country: "Georgia", latitude: 41.7151, longitude: 44.8271 },
   { city: "Dubai", country: "United Arab Emirates", latitude: 25.276987, longitude: 55.296249 },
   { city: "Abu Dhabi", country: "United Arab Emirates", latitude: 24.4539, longitude: 54.3773 },
+  { city: "Buenos Aires", country: "Argentina", latitude: -34.6037, longitude: -58.3816 },
 ];
 
