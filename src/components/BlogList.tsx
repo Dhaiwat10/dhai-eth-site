@@ -137,7 +137,7 @@ function BlogList() {
                   year: 'numeric',
                   month: 'long',
                   day: 'numeric'
-                })}
+                })} • {post.readingTime} min read
               </time>
               
               <p itemProp="description" className="text-gray-400 mt-3 mb-4">

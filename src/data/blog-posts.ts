@@ -1,4 +1,5 @@
 import type { BlogPost } from "../types/blog";
+import { calculateReadingTime } from "../utils/reading-time";
 
 type BlogFrontMatter = {
   id?: string;
@@ -123,6 +124,7 @@ export const blogPosts: BlogPost[] = Object.entries(markdownFiles)
         ? frontMatter.tags.map((tag) => String(tag))
         : [],
       content: content.trim(),
+      readingTime: calculateReadingTime(content),
     };
   })
   .sort((a, b) => {

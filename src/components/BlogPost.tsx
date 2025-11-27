@@ -45,7 +45,7 @@ function BlogPost() {
             year: 'numeric',
             month: 'long',
             day: 'numeric'
-          })}
+          })} • {post.readingTime} min read
         </time>
         
         <div className="flex flex-wrap gap-2 mt-4">

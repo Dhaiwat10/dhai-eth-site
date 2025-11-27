@@ -90,7 +90,7 @@ function Home() {
                   year: "numeric",
                   month: "long",
                   day: "numeric",
-                })}
+                })} • {post.readingTime} min read
               </time>
 
               <p className="text-gray-400 mt-3 mb-4 line-clamp-3">
