@@ -4,6 +4,7 @@ import { blogPosts } from "../data/blog-posts";
 import { LetterboxdRecent } from "./LetterboxdRecent";
 import { GitHubStats } from "./GitHubStats";
 import TravelMap from "./TravelMap";
+import PageTransition from "./PageTransition";
 
 function Home() {
   const motorsportsVideoRef = useRef<HTMLVideoElement | null>(null);
@@ -25,7 +26,8 @@ function Home() {
     .slice(0, 3);
 
   return (
-    <div>
+    <PageTransition>
+      <div>
       <section className="mb-16">
         <h1 className="text-5xl font-bold text-white mb-4">dhai.eth</h1>
         <h2 className="text-3xl text-gray-300 mb-6">Dhaiwat Pandya</h2>
@@ -74,10 +76,11 @@ function Home() {
         </div>
 
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {latestPosts.map((post) => (
+          {latestPosts.map((post, index) => (
             <article
               key={post.id}
-              className="rounded-lg border border-gray-800 p-6 hover:border-gray-700 transition-all bg-gray-900/50"
+              style={{ animationDelay: `${index * 0.1}s` }}
+              className="animate-slide-up rounded-lg border border-gray-800 p-6 hover:border-gray-700 transition-all bg-gray-900/50"
             >
               <Link to={`/blog/${post.id}`}>
                 <h4 className="text-xl font-bold text-white mb-2 hover:text-gray-300 transition-colors">
@@ -183,6 +186,7 @@ function Home() {
         <TravelMap />
       </section>
     </div>
+    </PageTransition>
   );
 }
 

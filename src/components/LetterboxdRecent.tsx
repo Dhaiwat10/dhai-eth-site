@@ -77,7 +77,7 @@ export function LetterboxdRecent({
   }
 
   return (
-    <div className="space-y-6">
+    <div className="animate-fade-in space-y-6">
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
         {movies.map((movie) => (
           <a

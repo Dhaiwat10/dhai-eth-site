@@ -1,6 +1,7 @@
 import { Link, useSearchParams, useNavigate } from 'react-router-dom';
 import { blogPosts } from '../data/blog-posts';
 import { useMemo, useState } from 'react';
+import PageTransition from './PageTransition';
 
 function BlogList() {
   const [searchParams] = useSearchParams();
@@ -44,7 +45,8 @@ function BlogList() {
   };
 
   return (
-    <div className="max-w-4xl mx-auto">
+    <PageTransition>
+      <div className="max-w-4xl mx-auto">
       <h1 className="text-4xl font-bold text-white mb-8">Blog</h1>
       
       {/* Search and Filter Controls */}
@@ -119,12 +121,13 @@ function BlogList() {
             </button>
           </div>
         ) : (
-          filteredPosts.map((post) => (
-            <article 
-              key={post.id} 
+          filteredPosts.map((post, index) => (
+            <article
+              key={post.id}
+              style={{ animationDelay: `${index * 0.05}s` }}
               itemScope
               itemType="https://schema.org/BlogPosting"
-              className="rounded-lg border border-gray-800 p-6 hover:border-gray-700 transition-all bg-gray-900/50"
+              className="animate-slide-up rounded-lg border border-gray-800 p-6 hover:border-gray-700 transition-all bg-gray-900/50"
             >
               <Link to={`/blog/${post.id}`}>
                 <h2 itemProp="headline" className="text-2xl font-bold text-white mb-2 hover:text-gray-300 transition-colors">
@@ -171,6 +174,7 @@ function BlogList() {
         )}
       </div>
     </div>
+    </PageTransition>
   );
 }
 

@@ -5,6 +5,7 @@ import { blogPosts } from '../data/blog-posts';
 import CodeBlock from './CodeBlock';
 import SEO from './SEO';
 import StructuredData from './StructuredData';
+import PageTransition from './PageTransition';
 
 function BlogPost() {
   const { id } = useParams<{ id: string }>();
@@ -17,7 +18,8 @@ function BlogPost() {
   const publishedDate = new Date(post.date).toISOString();
 
   return (
-    <article className="max-w-4xl mx-auto">
+    <PageTransition>
+      <article className="max-w-4xl mx-auto">
       <SEO
         title={post.title}
         description={post.excerpt}
@@ -135,6 +137,7 @@ function BlogPost() {
         </ReactMarkdown>
       </div>
     </article>
+    </PageTransition>
   );
 }
 

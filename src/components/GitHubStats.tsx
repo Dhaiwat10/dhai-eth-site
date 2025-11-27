@@ -79,7 +79,7 @@ export function GitHubStats({ username }: GitHubStatsProps) {
   ];
 
   return (
-    <div className="space-y-6">
+    <div className="animate-fade-in space-y-6">
       {/* Latest Repos */}
       {stats.latestRepos.length > 0 && (
         <div>
