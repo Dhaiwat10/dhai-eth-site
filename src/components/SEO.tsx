@@ -28,10 +28,10 @@ function SEO({
   author = 'Dhaiwat Pandya',
 }: SEOProps) {
   const location = useLocation();
-  
+
   // Get full URL - handle hash router
   const fullUrl = `${SITE_URL}${location.pathname === '/' ? '' : `#${location.pathname}`}`;
-  
+
   // Use defaults if not provided
   const pageTitle = title ? `${title} | ${SITE_NAME}` : DEFAULT_TITLE;
   const pageDescription = description || DEFAULT_DESCRIPTION;
@@ -56,11 +56,16 @@ function SEO({
     updateMetaTag('description', pageDescription);
     updateMetaTag('author', author);
     updateMetaTag('viewport', 'width=device-width, initial-scale=1.0');
+    updateMetaTag('theme-color', '#111827'); // dark-900
+
+    // Dynamic OG Image
+    // Using a simple service to generate text-based OG images if no specific image is provided
+    const dynamicImage = image || `https://placehold.co/1200x630/111827/FFF?text=${encodeURIComponent(title || SITE_NAME)}&font=roboto`;
 
     // Open Graph tags
     updateMetaTag('og:title', pageTitle, 'property');
     updateMetaTag('og:description', pageDescription, 'property');
-    updateMetaTag('og:image', pageImage, 'property');
+    updateMetaTag('og:image', dynamicImage, 'property');
     updateMetaTag('og:url', fullUrl, 'property');
     updateMetaTag('og:type', type, 'property');
     updateMetaTag('og:site_name', SITE_NAME, 'property');
@@ -69,13 +74,13 @@ function SEO({
     updateMetaTag('twitter:card', 'summary_large_image');
     updateMetaTag('twitter:title', pageTitle);
     updateMetaTag('twitter:description', pageDescription);
-    updateMetaTag('twitter:image', pageImage);
+    updateMetaTag('twitter:image', dynamicImage);
     updateMetaTag('twitter:creator', '@dhaiwat10');
     updateMetaTag('twitter:site', '@dhaiwat10');
 
     // Clean up old article tags if switching away from article type
     const existingArticleTags = document.querySelectorAll('meta[property^="article:"]');
-    
+
     // Article-specific tags
     if (type === 'article') {
       if (publishedTime) {
@@ -100,7 +105,7 @@ function SEO({
         }
       });
     }
-    
+
     // Clean up old article tag indices
     const articleTagIndices = document.querySelectorAll('meta[property^="article:tag:"]');
     if (type !== 'article' || !tags || tags.length === 0) {

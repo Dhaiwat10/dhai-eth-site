@@ -1,10 +1,4 @@
 User-agent: *
 Allow: /
 
-# Sitemap
 Sitemap: https://dhai.eth.limo/sitemap.xml
-
-# Disallow hash routes (some crawlers may not index them properly)
-# Note: HashRouter URLs use #/ which may not be crawled by all search engines
-# Consider migrating to BrowserRouter for better SEO
-

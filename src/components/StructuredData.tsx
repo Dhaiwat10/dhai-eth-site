@@ -48,24 +48,51 @@ function StructuredData({ type, article }: StructuredDataProps) {
       const articleUrl = `${SITE_URL}#/blog/${article.id}`;
       jsonLd = {
         '@context': 'https://schema.org',
-        '@type': 'BlogPosting',
-        headline: article.title,
-        description: article.excerpt,
-        url: articleUrl,
-        datePublished: article.date,
-        dateModified: article.date,
-        author: {
-          '@type': 'Person',
-          name: 'Dhaiwat Pandya',
-          url: SITE_URL,
-        },
-        publisher: {
-          '@type': 'Person',
-          name: 'Dhaiwat Pandya',
-        },
-        ...(article.tags && article.tags.length > 0 && {
-          keywords: article.tags.join(', '),
-        }),
+        '@graph': [
+          {
+            '@type': 'BreadcrumbList',
+            itemListElement: [
+              {
+                '@type': 'ListItem',
+                position: 1,
+                name: 'Home',
+                item: SITE_URL,
+              },
+              {
+                '@type': 'ListItem',
+                position: 2,
+                name: 'Blog',
+                item: `${SITE_URL}#/blog`,
+              },
+              {
+                '@type': 'ListItem',
+                position: 3,
+                name: article.title,
+                item: articleUrl,
+              },
+            ],
+          },
+          {
+            '@type': 'BlogPosting',
+            headline: article.title,
+            description: article.excerpt,
+            url: articleUrl,
+            datePublished: article.date,
+            dateModified: article.date,
+            author: {
+              '@type': 'Person',
+              name: 'Dhaiwat Pandya',
+              url: SITE_URL,
+            },
+            publisher: {
+              '@type': 'Person',
+              name: 'Dhaiwat Pandya',
+            },
+            ...(article.tags && article.tags.length > 0 && {
+              keywords: article.tags.join(', '),
+            }),
+          },
+        ],
       };
     } else {
       return;
