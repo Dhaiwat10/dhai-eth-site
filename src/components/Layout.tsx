@@ -49,14 +49,6 @@ function Layout() {
               >
                 Blog
               </Link>
-              {location.pathname === "/" && (
-                <Link
-                  to="/#travels"
-                  className="font-medium transition-colors text-gray-400 hover:text-white"
-                >
-                  Travels
-                </Link>
-              )}
             </div>
           </div>
         </div>
