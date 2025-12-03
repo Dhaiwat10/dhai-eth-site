@@ -111,26 +111,71 @@ function BlogPost() {
                 {children}
               </ol>
             ),
-            li: ({ children }) => (
-              <li className="ml-4">
+            li: ({ children, id, ...props }) => (
+              <li id={id} className="ml-4" {...props}>
                 {children}
               </li>
             ),
-            a: ({ href, children }) => (
-              <a 
-                href={href}
-                className="text-gray-300 hover:text-white underline underline-offset-4 decoration-gray-600 hover:decoration-white transition-colors break-all"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                {children}
-              </a>
-            ),
+            a: ({ href, children }) => {
+              // Anchor links (footnotes) - use JS scroll to avoid breaking hash router
+              const isAnchor = href?.startsWith('#');
+              if (isAnchor) {
+                const handleClick = (e: React.MouseEvent) => {
+                  e.preventDefault();
+                  // Try to find the specific element first, fallback to footnotes section
+                  const targetId = href.slice(1);
+                  let element = document.getElementById(targetId);
+                  if (!element) {
+                    // Fallback: scroll to the footnotes section
+                    element = document.querySelector('.footnotes');
+                  }
+                  if (element) {
+                    element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                  }
+                };
+                return (
+                  <a 
+                    href={href}
+                    onClick={handleClick}
+                    className="text-gray-300 hover:text-white underline underline-offset-4 decoration-gray-600 hover:decoration-white transition-colors cursor-pointer"
+                  >
+                    {children}
+                  </a>
+                );
+              }
+              return (
+                <a 
+                  href={href}
+                  className="text-gray-300 hover:text-white underline underline-offset-4 decoration-gray-600 hover:decoration-white transition-colors break-all"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {children}
+                </a>
+              );
+            },
             blockquote: ({ children }) => (
               <blockquote className="border-l-4 border-gray-600 pl-4 italic text-gray-400 my-4">
                 {children}
               </blockquote>
             ),
+            // Footnote reference (the superscript number in the text)
+            sup: ({ children, id, ...props }) => (
+              <sup id={id} className="text-xs text-gray-400 ml-0.5" {...props}>
+                {children}
+              </sup>
+            ),
+            // Footnotes section container
+            section: ({ children, className, ...props }) => {
+              if (className === 'footnotes') {
+                return (
+                  <section className="footnotes mt-8 pt-6 border-t border-gray-700" {...props}>
+                    {children}
+                  </section>
+                );
+              }
+              return <section className={className} {...props}>{children}</section>;
+            },
           }}
         >
           {post.content}

@@ -56,6 +56,65 @@ button {
   cursor: pointer;
 }
 
+/* Footnote styles */
+
+/* Hide the auto-generated Footnotes heading */
+.footnotes h2 {
+  display: none;
+}
+
+.footnotes ol {
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+  color: #9ca3af;
+  font-size: 0.875rem;
+  counter-reset: footnote-counter;
+}
+
+.footnotes li {
+  margin-bottom: 0.5rem;
+  counter-increment: footnote-counter;
+}
+
+.footnotes li::before {
+  content: counter(footnote-counter);
+  font-size: 0.75em;
+  vertical-align: super;
+  margin-right: 0.25rem;
+  color: #9ca3af;
+}
+
+.footnotes li p {
+  display: inline;
+  margin: 0;
+}
+
+/* Hide back-reference arrows */
+.footnotes a[data-footnote-backref],
+.footnotes li a:last-child,
+.footnotes a[href^="#fnref"] {
+  display: none !important;
+}
+
+/* Footnote reference links (superscript numbers in brackets) */
+sup a {
+  color: #9ca3af;
+  text-decoration: none;
+}
+
+sup a::before {
+  content: '[^';
+}
+
+sup a::after {
+  content: ']';
+}
+
+sup a:hover {
+  color: #d1d5db;
+}
+
 /* Respect user's motion preferences */
 @media (prefers-reduced-motion: reduce) {
   *,
