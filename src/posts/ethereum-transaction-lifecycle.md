@@ -51,4 +51,4 @@ It is important to note here that the transaction is not final at this point. It
 After finalisation though, a transaction is irrreversible and is etched onto the chain forever.
 
 [^1]: Not all mempools are public. There are private ones as well, check out [Flashbots](https://protectrpc.flashbots.net/about). 
-[^2]: An important caveat to note here is the fact that most Ethereum validators delegate their block-building duties out to professional block builders to maximise MEV revenue. 
+[^2]: An important caveat to note here is the fact that most Ethereum validators delegate their block-building duties out to professional block builders to maximise MEV revenue. See [mev-boost](https://boost.flashbots.net/)

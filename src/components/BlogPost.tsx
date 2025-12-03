@@ -42,6 +42,10 @@ function BlogPost() {
           {post.title}
         </h1>
         
+        {post.excerpt && (
+          <p className="text-lg text-gray-400 mb-4">{post.excerpt}</p>
+        )}
+        
         <time dateTime={publishedDate} className="text-gray-500">
           {new Date(post.date).toLocaleDateString('en-US', {
             year: 'numeric',
