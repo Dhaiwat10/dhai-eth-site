@@ -119,7 +119,7 @@ function BlogPost() {
             a: ({ href, children }) => {
               // Anchor links (footnotes) - use JS scroll to avoid breaking hash router
               const isAnchor = href?.startsWith('#');
-              if (isAnchor) {
+              if (isAnchor && href) {
                 const handleClick = (e: React.MouseEvent) => {
                   e.preventDefault();
                   // Try to find the specific element first, fallback to footnotes section
