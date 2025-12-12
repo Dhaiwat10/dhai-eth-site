@@ -32,7 +32,7 @@ function Home() {
         <h1 className="text-5xl font-bold text-white mb-4">dhai.eth</h1>
         <h2 className="text-3xl text-gray-300 mb-6">Dhaiwat Pandya</h2>
         <p className="text-xl text-gray-400 max-w-2xl">
-          Ethereum Developer. Relentlessly Curious.
+          Chasing my curiosities. Spiraling upwards.
         </p>
 
         <div className="flex flex-row gap-4 mt-4">
