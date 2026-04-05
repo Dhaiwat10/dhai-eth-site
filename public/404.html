@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Redirecting… | dhai.eth</title>
+    <script>
+      // Redirect bare paths (e.g. /blog/my-post) to hash routes (/#/blog/my-post)
+      // so the SPA can handle them. IPFS gateways and static hosts
+      // serve 404.html for paths that don't match a real file.
+      var path = window.location.pathname;
+      // Strip trailing slash
+      if (path.length > 1 && path.endsWith('/')) {
+        path = path.slice(0, -1);
+      }
+      // Only redirect if there's an actual path (not just "/")
+      if (path && path !== '/') {
+        var search = window.location.search || '';
+        window.location.replace('/#' + path + search);
+      } else {
+        window.location.replace('/');
+      }
+    </script>
+  </head>
+  <body></body>
+</html>
