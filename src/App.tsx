@@ -4,10 +4,12 @@ import Home from "./components/Home";
 import BlogList from "./components/BlogList";
 import BlogPost from "./components/BlogPost";
 import NotFound from "./components/NotFound";
+import ScrollToTop from "./components/ScrollToTop";
 
 function App() {
   return (
     <HashRouter>
+      <ScrollToTop />
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
