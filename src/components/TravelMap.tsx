@@ -105,40 +105,6 @@ function TravelMap() {
     };
   }, [center, zoom, isMounted]);
 
-  useEffect(() => {
-    const markersLayer = markersLayerRef.current;
-    if (!markersLayer) {
-      return;
-    }
-
-    markersLayer.clearLayers();
-
-    travelLocations.forEach((location) => {
-      L.marker([location.latitude, location.longitude], {
-        icon: defaultIcon,
-      })
-        .addTo(markersLayer)
-        .bindPopup(
-          `
-            <div class="text-gray-900">
-              <div class="font-bold text-lg">${location.city}</div>
-              <div class="text-sm text-gray-600">${location.country}</div>
-              ${
-                location.year
-                  ? `<div class="text-xs text-gray-500 mt-1">${location.year}</div>`
-                  : ""
-              }
-              ${
-                location.notes
-                  ? `<div class="text-sm text-gray-700 mt-1">${location.notes}</div>`
-                  : ""
-              }
-            </div>
-          `
-        );
-    });
-  }, [travelLocations]);
-
   if (travelLocations.length === 0) {
     return (
       <div className="rounded-xl border border-gray-800 bg-gray-900/50 p-8 text-center text-gray-400">
