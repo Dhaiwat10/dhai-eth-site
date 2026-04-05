@@ -36,31 +36,38 @@ function Home() {
         </p>
 
         <div className="flex flex-row gap-4 mt-4">
-          <Link
-            to="https://x.com/dhaiwat10"
+          <a
+            href="https://x.com/dhaiwat10"
             className="text-gray-400 hover:text-white font-medium transition-colors underline"
             target="_blank"
+            rel="noopener noreferrer"
           >
             Twitter
-          </Link>
-          <Link
-            to="https://github.com/dhaiwat10"
+          </a>
+          <a
+            href="https://github.com/dhaiwat10"
             className="text-gray-400 hover:text-white font-medium transition-colors underline"
+            target="_blank"
+            rel="noopener noreferrer"
           >
             GitHub
-          </Link>
-          <Link
-            to="https://hackmd.io/@dhaiwat10/ByA1tWTgee"
+          </a>
+          <a
+            href="https://hackmd.io/@dhaiwat10/ByA1tWTgee"
             className="text-gray-400 hover:text-white font-medium transition-colors underline"
+            target="_blank"
+            rel="noopener noreferrer"
           >
             CV
-          </Link>
-          <Link
-            to="https://farcaster.xyz/dhai.eth"
+          </a>
+          <a
+            href="https://farcaster.xyz/dhai.eth"
             className="text-gray-400 hover:text-white font-medium transition-colors underline"
+            target="_blank"
+            rel="noopener noreferrer"
           >
             Farcaster
-          </Link>
+          </a>
         </div>
       </section>
 
@@ -115,13 +122,14 @@ function Home() {
         <div className="mb-6">
           <div className="flex justify-between items-center mb-3">
             <h3 className="text-2xl font-bold text-white">GitHub Activity</h3>
-            <Link
-              to="https://github.com/dhaiwat10"
+            <a
+              href="https://github.com/dhaiwat10"
               className="text-gray-400 hover:text-white font-medium transition-colors"
               target="_blank"
+              rel="noopener noreferrer"
             >
               View profile →
-            </Link>
+            </a>
           </div>
           <p className="text-gray-400 max-w-2xl">
             I am always experimenting with problems I find interesting. I post a lot of these experiments on my GitHub.
@@ -159,13 +167,14 @@ function Home() {
         <div className="mb-6">
           <div className="flex justify-between items-center mb-3">
             <h3 className="text-2xl font-bold text-white">Recent Films</h3>
-            <Link
-              to="https://letterboxd.com/dhaiwat10"
+            <a
+              href="https://letterboxd.com/dhaiwat10"
               className="text-gray-400 hover:text-white font-medium transition-colors"
               target="_blank"
+              rel="noopener noreferrer"
             >
               View all →
-            </Link>
+            </a>
           </div>
           <p className="text-gray-400 max-w-2xl">
             Movies are my favourite art form. Here are a few that I watched the most recently from my Letterboxd profile.
